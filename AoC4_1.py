@@ -1,9 +1,8 @@
 file = open('inputs/day4inp1')
-rawinp = file.read()
+rawinp = file.read().strip()
 file.close()
 
 rows = rawinp.split("\n")
-rows.pop() #remove trailing blank line
 matrix = []
 for row in rows:
     matrix.append(list(row))
