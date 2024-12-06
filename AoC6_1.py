@@ -1,5 +1,3 @@
-import re
-
 file = open('inputs/day6inp1')
 rawinp = file.read().strip()
 file.close()
