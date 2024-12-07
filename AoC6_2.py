@@ -1,4 +1,3 @@
-import copy
 from tqdm import tqdm
 file = open('inputs/day6inp1')
 rawinp = file.read().strip()
