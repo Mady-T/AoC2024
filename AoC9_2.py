@@ -1,3 +1,6 @@
+# DOES NOT WORK! 
+# USE AoC9_2v2.py instead!!!
+
 from tqdm import tqdm
 
 with open('inputs/day9inp1') as f:
