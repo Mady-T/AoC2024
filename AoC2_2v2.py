@@ -14,17 +14,28 @@ for i in range(len(rawinp)):
             diskspace.append('_')
 
 last_pos = len(diskspace) - 1
-for i in range(len(diskspace)):
-    if diskspace[i] == '_':
-        try:
-            while diskspace[last_pos] == '_':
-                last_pos -= 1
-            if last_pos < i:
+
+i = last_pos
+while i >= 0:
+    if diskspace[i] != '_':
+        size = 0
+        id = diskspace[i]
+        while diskspace[i-size] == id:
+            size+=1
+        i -= size - 1
+        for j in range(i):
+            flag = True
+            for k in range(size):
+                if diskspace[j+k] != '_':
+                    flag=False
+                    break
+            if flag:
+                for k in range(size):
+                    diskspace[i+k], diskspace[j+k] = diskspace[j+k], diskspace[i+k]
                 break
-            diskspace[i], diskspace[last_pos] = diskspace[last_pos], diskspace[i]
-        except IndexError:
-            print(last_pos)
-            break
+    i -= 1
+
+
 
 checksum = 0
 for i in range(len(diskspace)):
