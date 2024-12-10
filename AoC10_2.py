@@ -14,24 +14,23 @@ y_lim = len(matrix[0])-1
 
 def traverse(map, elevation, xcoord, ycoord):
     if elevation != 9:
-        peak_coords = set()
+        tot_paths = 0
         if xcoord < x_lim and map[xcoord+1][ycoord] == elevation + 1:
-            peak_coords.update(traverse(map, elevation+1, xcoord+1, ycoord))
+            tot_paths += traverse(map, elevation+1, xcoord+1, ycoord)
         if xcoord > 0 and map[xcoord-1][ycoord] == elevation + 1:
-            peak_coords.update(traverse(map, elevation+1, xcoord-1, ycoord))
+            tot_paths += traverse(map, elevation+1, xcoord-1, ycoord)
         if ycoord < y_lim and map[xcoord][ycoord+1] == elevation + 1:
-            peak_coords.update(traverse(map, elevation+1, xcoord, ycoord+1))
+            tot_paths += traverse(map, elevation+1, xcoord, ycoord+1)
         if ycoord > 0 and map[xcoord][ycoord-1] == elevation + 1:
-            peak_coords.update(traverse(map, elevation+1, xcoord, ycoord-1))
-        return peak_coords
+            tot_paths += traverse(map, elevation+1, xcoord, ycoord-1)
+        return tot_paths
     else:
-        return {(xcoord, ycoord)}
+        return 1
 
 sum_scores = 0
 for i in range(len(matrix)):
     for j in range(len(matrix)):
         if matrix[i][j] == 0:
-            peak_set = traverse(matrix, 0, i, j)
-            sum_scores += len(peak_set)
+            sum_scores += traverse(matrix, 0, i, j)
 
 print(sum_scores)
