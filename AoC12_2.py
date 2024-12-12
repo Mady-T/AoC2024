@@ -83,7 +83,7 @@ def getBoundaryCost(regions):
             elif len(adjs) == 2:
                 diag1 = set(getDiagonals(coord, adjs[0])) & region_set
                 diag2 = set(getDiagonals(coord, adjs[1])) & region_set
-                if max(list(np.subtract(adjs[0], adjs[1]))) < 2:
+                if max(list(abs(np.subtract(adjs[0], adjs[1])))) < 2:
                     if len(diag1) == 2 and len(diag2) == 2:
                         perimeter+=2
                     elif len(diag1) == 0 and len(diag2) == 0:
@@ -106,7 +106,7 @@ def getBoundaryCost(regions):
                     perimeter -= 4
             else:
                 perimeter -= 4
-            # print(perimeter)
+            # print(str(area)+" perimeter: "+str(perimeter))
             # printGarden(region_set)
     return (area, perimeter)
 
