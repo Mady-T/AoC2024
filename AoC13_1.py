@@ -30,7 +30,6 @@ for i in range(len(prize_locs)):
     coeffs = np.array([[A_x, B_x],[A_y, B_y]])
     consts = np.array([P_x, P_y]).transpose()
     objective = np.array([3,1])
-    # print(consts)
     result = linprog(objective, A_eq=coeffs, b_eq=consts, integrality=1, options={'presolve': False})
     if result.status == 0:
         cost += result.fun
@@ -38,38 +37,4 @@ for i in range(len(prize_locs)):
         print('unforseen')
     totalCost += cost
 print(totalCost)
-#     mul = B_y/B_x
-#     print(A_y - mul*A_x)
-#     A_y, B_y, P_y = round(A_y - mul*A_x, 8), round(B_y - mul*B_x, 8), round(P_y - mul * P_x, 8)
-#     if P_y == 0 and A_y != 0:
-#         continue
-#     elif A_y != 0:
-#         if round(P_y % A_y, 4) != 0:
-#             # print(P_y % A_y)
-#             continue
-#         A = round(P_y / A_y, 8)
-#         B_num = P_x - A_x*A
-#         if round(B_num % B_x, 4) != 0:
-#             # print(B_num)
-#             continue
-#         else:
-#             B = round(B_num / B_x, 8)
-#             cost = 3 * A + B
-#             # print(cost)
-#     else:
-#         flag = False
-#         # print('A')
-#         for B in range(P_x//B_x, -1, -B_x):
-#             for A in range(P_x//A_x, A_x):
-#                 print(round(P_x - (A_x * A + B_x * B)))
-#                 if round(P_x - (A_x * A + B_x * B)) == 0:
-#                     cost = 3*A + B
-#                     flag = True
-#                     break
-#             if flag:
-#                 break
-
-#     totalCost += cost
-
-# print(totalCost)
 
