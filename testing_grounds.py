@@ -1,7 +1,6 @@
 import numpy as np
 
 arr = np.array([[1,2,3],[4,5,6]])
-coords = (0,2)
-print(arr[coords])
-lst = list(arr)
-print((lst))
+CCWMATRIX = np.array([[0, 1], [-1, 0]])
+direction = np.array([1,0])
+print(direction @ CCWMATRIX)
