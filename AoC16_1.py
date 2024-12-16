@@ -67,21 +67,19 @@ def traverse(startPos, startDir, maze, costs):
                     costs[tuple(ccw)] = heuristic+1001
                     posStack.append((ccw, orientation @ CCWMATRIX, heuristic+1001))
         # numIters += 1
-        # if numIters % 100000 == 0:
-        #     print(len(posStack))
-        #     mat = []
+        # if numIters % 1 == 0:
+        #     s = ''
         #     for row in costs:
-        #         s = ''
         #         for num in row:
         #             if num == -np.inf:
-        #                 s = s+'_'
+        #                 s = s+'_____ '
         #             elif num == np.inf:
-        #                 s = s+'#'
+        #                 s = s+'##### '
         #             else:
-        #                 s = s+str(num%10)
-        #         mat.append(s)
+        #                 s = s+str(int(num%100000)).zfill(5)+" "
+        #         s += '\n'
         #     with open('inputs/day16out1', 'w') as f:
-        #         f.write(str(mat))
+        #         f.write(s)
 
 
 
@@ -91,7 +89,11 @@ startpos, finishpos = getStartFinish(matrix)
 traverse(startpos, direction, maze, costs)
 print(costs[finishpos])
 
-bestTiles = set(finishpos)
+# best_cost = costs[finishpos]
+
+# bestTiles = set()
+# bestTiles.add(finishpos)
+
 
 # bestPath = deque([np.array(finishpos)])
 # while len(bestPath)>0:
@@ -103,27 +105,26 @@ bestTiles = set(finishpos)
 #     left = pos + np.array([0,-1])
 #     right = pos + np.array([0,1])
 #     m = min(costs[tuple(down)], costs[tuple(up)], costs[tuple(right)], costs[tuple(left)])
-#     if costs[tuple(down)] == m:
+#     if tuple(pos) == finishpos:
+#         if costs[tuple(down)] == m and tuple(down) not in bestTiles:
+#             bestPath.append(down)
+#             bestTiles.add(tuple(down))
+#         if costs[tuple(left)] == m and tuple(left) not in bestTiles:
+#             bestPath.append(left)
+#             bestTiles.add(tuple(left))
+#         continue
+#     if (costs[tuple(down)] == m or costs[tuple(down)] == m + 1000 and costs[tuple(down+down-pos)] == m-1) and tuple(down) not in bestTiles:
 #         bestPath.append(down)
 #         bestTiles.add(tuple(down))
-#     if costs[tuple(up)] == m:
+#     if (costs[tuple(up)] == m or costs[tuple(up)] == m + 1000 and costs[tuple(up+up-pos)] == m-1) and tuple(up) not in bestTiles:
 #         bestPath.append(up)
 #         bestTiles.add(tuple(up))
-#     if costs[tuple(left)] == m:
+#     if (costs[tuple(left)] == m or costs[tuple(left)] == m + 1000 and costs[tuple(left+left-pos)] == m-1) and tuple(left) not in bestTiles:
 #         bestPath.append(left)
 #         bestTiles.add(tuple(left))
-#     if costs[tuple(right)] == m:
+#     if (costs[tuple(right)] == m or costs[tuple(right)] == m + 1000 and costs[tuple(right+right-pos)] == m-1) and tuple(right) not in bestTiles:
 #         bestPath.append(right)
 #         bestTiles.add(tuple(right))
 
 # print(len(bestTiles))
-
-# mat = np.zeros_like(costs, dtype = int)
-# for tile in bestTiles:
-#     mat[tile] = 1
-
-# print(mat)
-
-# with open('inputs/day16out1', 'w') as f:
-#     out = [str(x) + '\n' for x in mat]
-#     f.write(str(out))
+# print(bestTiles)
